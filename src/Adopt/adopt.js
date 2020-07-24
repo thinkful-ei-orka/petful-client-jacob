@@ -15,6 +15,22 @@ export default class Adopt extends React.Component {
     currentCat: {},
     currentDog: {},
   };
+  adoptMyCat = () => {
+    this.context.setPet(this.state.currentCat);
+    PetApiService.removeCat().then(() => {
+      this.setState({
+        redirect: true,
+      });
+    });
+  };
+  adoptMyDog = () => {
+    this.context.setPet(this.state.currentDog);
+    PetApiService.removeDog().then(() => {
+      this.setState({
+        redirect: true,
+      });
+    });
+  };
   adoptCat = () => {
     //make an api call to delete the cat, then delete person from queue
     let currQueue = this.state.queue;
@@ -86,6 +102,9 @@ export default class Adopt extends React.Component {
     clearInterval(this.interval);
   }
   render() {
+    if (this.state.redirect) {
+      return <Redirect to="/congrats"></Redirect>;
+    }
     if (this.context.name === "") {
       //prevent people from accessing this component without first getting in line
       return <Redirect to="/" />;
@@ -124,7 +143,7 @@ export default class Adopt extends React.Component {
                 </li>
               </ul>
               {this.state.myTurn ? (
-                <button onClick={this.adoptCat}>Adopt</button>
+                <button onClick={this.adoptMyCat}>Adopt</button>
               ) : (
                 ""
               )}
@@ -156,7 +175,7 @@ export default class Adopt extends React.Component {
                 </li>
               </ul>
               {this.state.myTurn ? (
-                <button onClick={this.adoptDog}>Adopt</button>
+                <button onClick={this.adoptMyDog}>Adopt</button>
               ) : (
                 ""
               )}

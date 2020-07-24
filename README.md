@@ -1,6 +1,25 @@
 # Petful Client
 
+## Sole Contributor: Jacob Poteat
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+live app: https://petful-eta.vercel.app
+
+Welcome to our adorable adoption adventure! We are excited for you to add a new fluffy member to your family!
+
+Here are the rules for our adoption process:
+
+You may select from either a dog or a cat
+We run strictly on a First In, First Out basis. So you may only select the first cat or the first dog in line
+We also operate on a queue based system for saving your spot in line.
+If you refresh this page, you will lose your spot in line and will have to start the adoption process over again.
+
+### Tech Stack
+
+Client: HTML, CSS, React.js
+
+Server: Express
 
 ## Available Scripts
 

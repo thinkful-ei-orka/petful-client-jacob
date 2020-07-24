@@ -1,0 +1,2 @@
+*{box-sizing:border-box}.cat_info,.dog_info,.person_in_line{margin-bottom:15px;list-style-type:none;max-width:300px}#current_pets,#queue_header{text-align:center}#cat_img,#dog_img{width:55%}#pets_box,.queue_box{display:flex;justify-content:space-around}#cat_box,#dog_box,.cat_info_list{display:inline-block}
+/*# sourceMappingURL=main.e33374fe.chunk.css.map */

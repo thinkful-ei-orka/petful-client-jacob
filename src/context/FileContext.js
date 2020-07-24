@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 const fileContext = React.createContext({
-    name: '',
-    myPet: {},
-    setName: () => {},
+  name: "",
+  myPet: {},
+  setName: () => {},
 });
 
-export default fileContext
+export default fileContext;

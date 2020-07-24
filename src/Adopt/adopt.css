@@ -1,21 +1,27 @@
-.cat_info, .dog_info,.person_in_line {
-    margin-bottom: 15px;
-    list-style-type: none;
-    max-width: 300px;
+.cat_info,
+.dog_info,
+.person_in_line {
+  margin-bottom: 15px;
+  list-style-type: none;
+  max-width: 300px;
 }
 
-#queue_header, #current_pets {
-    text-align: center;
+#queue_header,
+#current_pets {
+  text-align: center;
 }
-#cat_img, #dog_img {
-width: 55%;
+#cat_img,
+#dog_img {
+  width: 55%;
 }
 
-#pets_box, .queue_box   {
-    display: flex;
-    justify-content: space-around;
-
+#pets_box,
+.queue_box {
+  display: flex;
+  justify-content: space-around;
 }
-#cat_box, .cat_info_list, #dog_box {
-    display: inline-block;
+#cat_box,
+.cat_info_list,
+#dog_box {
+  display: inline-block;
 }
