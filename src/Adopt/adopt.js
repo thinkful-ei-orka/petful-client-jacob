@@ -4,11 +4,15 @@ import fileContext from "../context/FileContext";
 import "./adopt.css";
 import Loading from "../Loading/Loading";
 import PetApiService from "../services/pet-service";
+
+
 export default class Adopt extends React.Component {
   static contextType = fileContext;
+  storeOfPeople = ["Johnny", "Amanda", "Steve", "Susie", "Bob"];
   state = {
     redirect: false,
     myTurn: false,
+    peopleBehindMe: 0,
     isLoading: false,
     error: null,
     queue: ["John", "Jane", "Billy"],
@@ -16,6 +20,7 @@ export default class Adopt extends React.Component {
     currentDog: {},
   };
   adoptMyCat = () => {
+    //If the user selects a cat, then this function runs, which sets the context to contain the selected pet, removes the pet from the server, and redirects to the congrats page
     this.context.setPet(this.state.currentCat);
     PetApiService.removeCat().then(() => {
       this.setState({
@@ -24,6 +29,7 @@ export default class Adopt extends React.Component {
     });
   };
   adoptMyDog = () => {
+    //If the user selects a dog, then this function runs, which sets the context to contain the selected pet, removes the pet from the server, and redirects to the congrats page
     this.context.setPet(this.state.currentDog);
     PetApiService.removeDog().then(() => {
       this.setState({
@@ -57,22 +63,34 @@ export default class Adopt extends React.Component {
     });
   };
   setCat = (cat) => {
+    //updates the current cat in the DOM
     this.setState({
       currentCat: cat,
     });
   };
   setDog = (dog) => {
+    //updates the current dog in the DOM
     this.setState({
       currentDog: dog,
       isLoading: false,
     });
   };
   setLine = (line) => {
+    //updates the queue
     if (!line.includes(this.context.name)) {
       line.push(this.context.name);
     }
     this.setState({
       queue: line,
+    });
+  };
+  addPersonToLine = () => {
+    let newPerson = this.storeOfPeople.pop();
+    let currQueue = this.state.queue;
+    currQueue.push(newPerson);
+    this.setState({
+      queue: currQueue,
+      peopleBehindMe: this.state.peopleBehindMe + 1,
     });
   };
   componentDidMount() {
@@ -85,6 +103,9 @@ export default class Adopt extends React.Component {
         this.setState({
           myTurn: true,
         });
+        if (this.state.peopleBehindMe < 5) {
+          this.addPersonToLine();
+        }
       }
     }, 5000);
     this.setState({
@@ -99,6 +120,7 @@ export default class Adopt extends React.Component {
       .catch((error) => this.setState({ error: error }));
   }
   componentWillUnmount() {
+    //clean up interval for selecting pet
     clearInterval(this.interval);
   }
   render() {
@@ -108,6 +130,9 @@ export default class Adopt extends React.Component {
     if (this.context.name === "") {
       //prevent people from accessing this component without first getting in line
       return <Redirect to="/" />;
+    }
+    if(this.state.peopleBehindMe === 5) {
+        clearInterval(this.interval);
     }
     console.log(this.state.queue);
     return (
@@ -143,7 +168,7 @@ export default class Adopt extends React.Component {
                 </li>
               </ul>
               {this.state.myTurn ? (
-                <button onClick={this.adoptMyCat}>Adopt</button>
+                <button onClick={this.adoptMyCat} className='adopt_button'>Adopt</button>
               ) : (
                 ""
               )}
@@ -175,7 +200,7 @@ export default class Adopt extends React.Component {
                 </li>
               </ul>
               {this.state.myTurn ? (
-                <button onClick={this.adoptMyDog}>Adopt</button>
+                <button onClick={this.adoptMyDog} className='adopt_button'>Adopt</button>
               ) : (
                 ""
               )}
@@ -188,10 +213,14 @@ export default class Adopt extends React.Component {
             {this.state.myTurn ? (
               <p>It's your turn! Select your new pet.</p>
             ) : (
-              this.state.queue.map((person) => {
-                return <li className="person_in_line">{person}</li>;
-              })
+              ""
             )}
+            {this.state.queue.map((person) => {
+              if(person === this.context.name){
+                  return <li className="person_in_line"><strong>{person}</strong></li>
+              }
+              return <li className="person_in_line">{person}</li>;
+            })}
           </ul>
         </section>
       </div>

@@ -43,7 +43,7 @@ export default class Root extends React.Component {
             line.
           </li>
           <li className='rule'>
-            If you refresh this page, you will lose your spot in line and will
+            If you refresh your browser, you will lose your spot in line and will
             have to start the adoption process over again.
           </li>
         </ol>

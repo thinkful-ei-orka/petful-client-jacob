@@ -6,6 +6,15 @@
   max-width: 300px;
 }
 
+.adopt_button {
+    margin-left: 30%;
+    margin-right: 50%;
+}
+
+.person_in_line {
+    text-align: center;
+}
+
 #queue_header,
 #current_pets {
   text-align: center;
