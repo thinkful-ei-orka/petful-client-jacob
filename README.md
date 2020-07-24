@@ -4,7 +4,7 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-live app: https://petful-eta.vercel.app
+live app: https://petful.jzpoteat.vercel.app
 
 Welcome to our adorable adoption adventure! We are excited for you to add a new fluffy member to your family!
 
